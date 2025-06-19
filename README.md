@@ -1,6 +1,5 @@
 # CCMS - Car Config Management System
 
-> Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
 > This is a Java Spring Boot application with a React Front-End that is being made in a NO AI help journey. This application is intended to help car mapping enthusiasts in their config building and sharing.
 
 ### Developments
