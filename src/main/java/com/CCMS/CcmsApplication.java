@@ -1,4 +1,4 @@
-package com.CCMS.CCMS;
+package com.CCMS;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

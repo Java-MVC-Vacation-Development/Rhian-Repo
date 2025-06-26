@@ -1,19 +1,15 @@
 package com.CCMS.service;
 
 import com.CCMS.model.Car;
-import com.CCMS.repository.BaseRepository;
 import com.CCMS.repository.CarRepository;
 
-import org.springframework.web.context.annotation.ApplicationScope;
+import org.springframework.stereotype.Service;
 
-@ApplicationScope
-public class CarService implements BaseService<Car> {
+@Service
+public class CarService extends BaseService<Car, CarRepository> {
 
-    CarRepository carRepository;
-
-    @Override
-    public BaseRepository<Car> getRepository() {
-        return carRepository;
+    public CarService(CarRepository repository){
+        super(repository);
     }
 
 }

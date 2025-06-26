@@ -1,19 +1,15 @@
 package com.CCMS.service;
 
 import com.CCMS.model.User;
-import com.CCMS.repository.BaseRepository;
 import com.CCMS.repository.UserRepository;
 
-import org.springframework.web.context.annotation.ApplicationScope;
+import org.springframework.stereotype.Service;
 
-@ApplicationScope
-public class UserService implements BaseService<User> {
+@Service
+public class UserService extends BaseService<User, UserRepository> {
 
-    UserRepository userRepository;
-
-    @Override
-    public BaseRepository<User> getRepository() {
-        return userRepository;
+    public UserService(UserRepository repository){
+        super(repository);
     }
 
 }

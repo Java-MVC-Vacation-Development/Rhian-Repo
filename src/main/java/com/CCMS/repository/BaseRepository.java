@@ -6,4 +6,4 @@ import org.springframework.data.repository.NoRepositoryBean;
 import com.CCMS.model.BaseEntity;
 
 @NoRepositoryBean
-public interface BaseRepository<T extends BaseEntity> extends JpaRepository<T, Long> { }
+public interface BaseRepository<Entity extends BaseEntity> extends JpaRepository<Entity, Long> { }
