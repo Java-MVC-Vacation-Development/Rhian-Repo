@@ -18,7 +18,12 @@ public class TestController extends BaseController<Test, TestRepository, TestSer
     
     @GetMapping("/teste")
     public ResponseEntity<Test> dcfgdgfd() {
-        return ResponseEntity.status(HttpStatus.OK).body(new Test());
+
+        Test a = new Test();
+        a.setId((long) 1.00);
+        a.setTest("asdasdasdsad");
+
+        return ResponseEntity.status(HttpStatus.OK).body(a);
     }
 
 }

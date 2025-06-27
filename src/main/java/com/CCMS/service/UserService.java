@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService extends BaseService<User, UserRepository> {
 
-    public UserService(UserRepository repository){
-        super(repository);
+    public UserService(UserRepository userRepository){
+        super(userRepository);
     }
 
 }

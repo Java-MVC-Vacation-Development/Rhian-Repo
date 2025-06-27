@@ -4,14 +4,15 @@ import com.CCMS.model.BaseEntity;
 import com.CCMS.repository.BaseRepository;
 import com.CCMS.service.BaseService;
 
-import jakarta.websocket.server.PathParam;
-
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,9 @@ public class BaseController<Entity extends BaseEntity, Repository extends BaseRe
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Entity> create(Entity t) {
+    public ResponseEntity<Entity> create(@RequestBody Entity t) {
+
+        t.setId(null);
 
         Entity response = getService().create(t);
         return (response != null) ? ResponseEntity.status(HttpStatus.CREATED).body(response) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -45,7 +48,7 @@ public class BaseController<Entity extends BaseEntity, Repository extends BaseRe
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Entity> update(@PathParam("id") Long id, Entity t) {
+    public ResponseEntity<Entity> update(@PathVariable("id") Long id, @RequestBody Entity t) {
 
         if (Objects.isNull(t.getId()))
             t.setId(id);
@@ -56,7 +59,7 @@ public class BaseController<Entity extends BaseEntity, Repository extends BaseRe
     }
     
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Entity> delete(@PathParam("id") Long id) {
+    public ResponseEntity<Entity> delete(@PathVariable("id") Long id) {
 
         Entity response = getService().delete(id).orElse(null);
         return (response != null) ? ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(response) : ResponseEntity.status(HttpStatus.ACCEPTED).build();
@@ -64,9 +67,17 @@ public class BaseController<Entity extends BaseEntity, Repository extends BaseRe
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Entity> get(@PathParam("id") Long id) {
+    public ResponseEntity<Entity> get(@PathVariable("id") Long id) {
 
         Entity response = getService().get(id).orElse(null);
+        return (response != null) ? ResponseEntity.status(HttpStatus.OK).body(response) : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+    }
+
+    @GetMapping("/getall")
+    public ResponseEntity<List<Entity>> getAll() {
+
+        List<Entity> response = getService().getAll();
         return (response != null) ? ResponseEntity.status(HttpStatus.OK).body(response) : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
     }

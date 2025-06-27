@@ -24,7 +24,7 @@ public class BaseService<Entity extends BaseEntity, Repository extends BaseRepos
     };
 
     public Entity create(Entity t) {
-        return getRepository().save(t);
+        return getRepository().saveAndFlush(t);
     }
     
     public Optional<Entity> update(Entity t) {
