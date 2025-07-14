@@ -25,6 +25,14 @@ public class Car extends BaseEntity{
     @JoinColumn(name="user_id", nullable=false)
     User user;
 
+    @ManyToOne
+    @JoinColumn(name="engine_id", nullable=false)
+    Engine engine;
+
+    @ManyToOne
+    @JoinColumn(name="engine_config_id", nullable=false)
+    EngineConfig engineConfig;
+
     @JsonIgnore
     public User getUser() {
         return user;
