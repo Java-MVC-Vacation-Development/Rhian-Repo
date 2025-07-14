@@ -1,24 +1,23 @@
 package com.CCMS.controller;
 
-import com.CCMS.model.BaseEntity;
-import com.CCMS.repository.BaseRepository;
-import com.CCMS.service.BaseService;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-
-import java.util.List;
+import java.util.Iterator;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.CCMS.model.BaseEntity;
+import com.CCMS.repository.BaseRepository;
+import com.CCMS.service.BaseService;
 
 @NoRepositoryBean
 @RequestMapping(path = "/api")
@@ -75,9 +74,9 @@ public class BaseController<Entity extends BaseEntity, Repository extends BaseRe
     }
 
     @GetMapping("/getall")
-    public ResponseEntity<List<Entity>> getAll() {
+    public ResponseEntity<Iterator<Entity>> getAll() {
 
-        List<Entity> response = getService().getAll();
+        Iterator<Entity> response = getService().getAll();
         return (response != null) ? ResponseEntity.status(HttpStatus.OK).body(response) : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
     }

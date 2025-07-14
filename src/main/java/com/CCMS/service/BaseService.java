@@ -1,6 +1,6 @@
 package com.CCMS.service;
 
-import java.util.List;
+import java.util.Iterator;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class BaseService<Entity extends BaseEntity, Repository extends BaseRepos
     };
 
     public Entity create(Entity t) {
-        return getRepository().saveAndFlush(t);
+        return getRepository().save(t);
     }
     
     public Optional<Entity> update(Entity t) {
@@ -38,8 +38,8 @@ public class BaseService<Entity extends BaseEntity, Repository extends BaseRepos
         return getRepository().findById(id);
     }
     
-    public List<Entity> getAll() {
-        return getRepository().findAll();
+    public Iterator<Entity> getAll() {
+        return getRepository().findAll().iterator();
     }
     
     public Optional<Entity> delete(Long id) {
