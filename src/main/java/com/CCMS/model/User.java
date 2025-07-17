@@ -19,7 +19,7 @@ import lombok.Setter;
 @Table(name = "users")
 public class User extends BaseEntity{
 
-    protected User() {}
+    public User() {}
     
     @NonNull
     String name;

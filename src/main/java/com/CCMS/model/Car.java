@@ -16,21 +16,21 @@ import lombok.Setter;
 @Table(name = "cars")
 public class Car extends BaseEntity{
 
-    protected Car() {}
+    public Car() {}
     
     @NonNull
     String name;
 
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name="user_id", nullable=true)
     User user;
 
     @ManyToOne
-    @JoinColumn(name="engine_id", nullable=false)
+    @JoinColumn(name="engine_id", nullable=true)
     Engine engine;
 
     @ManyToOne
-    @JoinColumn(name="engine_config_id", nullable=false)
+    @JoinColumn(name="engine_config_id", nullable=true)
     EngineConfig engineConfig;
 
     @JsonIgnore
