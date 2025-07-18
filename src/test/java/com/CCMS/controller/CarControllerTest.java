@@ -26,7 +26,7 @@ public class CarControllerTest extends AbstractTest{
 
         JSONObject inputJson = new JSONObject();
         try {
-            inputJson.put("name", "newCarasd");
+            inputJson.put("name", "newCar");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -112,7 +112,7 @@ public class CarControllerTest extends AbstractTest{
     // DELETE Car Test
     @Test
     public void deleteCar() throws Exception {
-        String uri = "/car/delete/1";
+        String uri = "/car/delete/2";
 
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
         int status = mvcResult.getResponse().getStatus();

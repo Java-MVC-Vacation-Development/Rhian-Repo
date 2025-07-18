@@ -34,7 +34,7 @@ public class EngineConfig extends BaseEntity{
     Boolean standardUse;
 
     @ManyToOne
-    @JoinColumn(name = "engine_id", nullable=false)
+    @JoinColumn(name = "engine_id", nullable=true)
     Engine engine;
 
 }
