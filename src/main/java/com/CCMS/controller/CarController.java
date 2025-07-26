@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.CCMS.model.Car;
 import com.CCMS.model.Engine;
-import com.CCMS.model.EngineConfig;
 import com.CCMS.repository.CarRepository;
 import com.CCMS.service.CarService;
 
@@ -34,8 +33,16 @@ public class CarController extends BaseController<Car, CarRepository, CarService
     @PostMapping(path = "/{carId}/engine")
     public ResponseEntity<Car> createCarEngine(@PathVariable long carId, @RequestBody Engine engine) throws Exception {
 
-        Car response = getService().updateCarEngine(carId, engine);
+        Car response = getService().createCarEngine(carId, engine);
         return (response != null) ? ResponseEntity.status(HttpStatus.CREATED).body(response) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+    }
+
+    @PutMapping(path = "/{carId}/engine")
+    public ResponseEntity<Car> updateCarEngine(@PathVariable long carId, @RequestBody Engine engine) throws Exception {
+
+        Car response = getService().updateCarEngine(carId, engine);
+        return (response != null) ? ResponseEntity.status(HttpStatus.ACCEPTED).body(response) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
     }
 
@@ -55,20 +62,7 @@ public class CarController extends BaseController<Car, CarRepository, CarService
     public ResponseEntity<Car> deleteCarEngine(@PathVariable Long carId) {
 
         Car response =  getService().deleteCarEngine(carId);
-        return (response != null) ? ResponseEntity.status(HttpStatus.CREATED).body(response) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-
-    }
-
-    // Engine Config Session
-
-    // PUT: http://localhost:8080/car/1/engineconfig/1
-    // Content-Type: application/json
-    // Payload: { "configName": "test", "engineMainSyncTime" : 10, "demonUse" : true, "ecoUse" : false, "standardUse" : false }
-    @PutMapping(path="/{carId}/engineconfig/{engineConfigId}")
-    public ResponseEntity<Car> updateCarsEngineConfig(@PathVariable Long carId, @PathVariable Long engineConfigId, @RequestBody EngineConfig engineConfig) {
-
-        Car response = getService().updateCarEngineConfig(carId, engineConfigId, engineConfig);
-        return (response != null) ? ResponseEntity.status(HttpStatus.CREATED).body(response) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return (response != null) ? ResponseEntity.status(HttpStatus.ACCEPTED).body(response) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
     }
 

@@ -1,10 +1,8 @@
 package com.CCMS.controller;
 
+import org.json.JSONObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -21,23 +19,7 @@ public class EngineConfigControllerTest extends AbstractTest{
     @Override
     public void setUp(){
 
-        String uriCreate = "/engineconfig/create";
-
         super.setUp();
-
-        JSONObject inputJson = new JSONObject();
-        try {
-            inputJson.put("configName", "newEngine");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            mvc.perform(MockMvcRequestBuilders.post(uriCreate)
-                .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson.toString())).andReturn();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -50,7 +32,7 @@ public class EngineConfigControllerTest extends AbstractTest{
         String uriCreate = "/engineconfig/create";
 
         JSONObject inputJson = new JSONObject();
-        inputJson.put("configName", "newEngine");
+        inputJson.put("configName", "newEngineConfig");
 
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uriCreate)
             .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson.toString())).andReturn();
@@ -79,7 +61,7 @@ public class EngineConfigControllerTest extends AbstractTest{
     // GET Single Car test
     @Test
     public void getSingleEngineConfig() throws Exception {
-        String uri = "/engineconfig/1";
+        String uri = "/engineconfig/3";
 
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
             .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
@@ -96,7 +78,7 @@ public class EngineConfigControllerTest extends AbstractTest{
     // PUT Car Test
     @Test
     public void updateEngineConfig() throws Exception {
-        String uri = "/engineconfig/update/1";
+        String uri = "/engineconfig/update/3";
 
         JSONObject inputJsonToEdit = new JSONObject();
         inputJsonToEdit.put("id",  "1");

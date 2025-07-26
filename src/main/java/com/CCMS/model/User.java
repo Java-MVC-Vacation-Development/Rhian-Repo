@@ -2,7 +2,6 @@ package com.CCMS.model;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -24,7 +23,7 @@ public class User extends BaseEntity{
     @NonNull
     String name;
     
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="user")
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="user")
     List<Car> cars;
 
     @Enumerated(EnumType.ORDINAL)

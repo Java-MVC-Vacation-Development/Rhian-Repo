@@ -7,7 +7,4 @@ import com.CCMS.model.Car;
 public interface CarRepository extends BaseRepository<Car>{
 
     List<Car> findAllByUserId(Long userId);
-
-    List<Car> findAllByEngineConfigId(Long engineConfigId);
-
 }

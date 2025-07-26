@@ -1,10 +1,8 @@
 package com.CCMS.controller;
 
+import org.json.JSONObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -20,24 +18,7 @@ public class EngineControllerTest extends AbstractTest{
     @Override
     public void setUp(){
 
-        String uriCreate = "/engine/create";
-
         super.setUp();
-
-        JSONObject inputJson = new JSONObject();
-        try {
-            inputJson.put("name", "newEngine");
-            inputJson.put("electrical", "false");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            mvc.perform(MockMvcRequestBuilders.post(uriCreate)
-                .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson.toString())).andReturn();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -80,7 +61,7 @@ public class EngineControllerTest extends AbstractTest{
     // GET Single Car test
     @Test
     public void getSingleEngine() throws Exception {
-        String uri = "/engine/1";
+        String uri = "/engine/3";
 
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
             .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
@@ -97,7 +78,7 @@ public class EngineControllerTest extends AbstractTest{
     // PUT Car Test
     @Test
     public void updateEngine() throws Exception {
-        String uri = "/engine/update/1";
+        String uri = "/engine/update/3";
 
         JSONObject inputJsonToEdit = new JSONObject();
         inputJsonToEdit.put("id",  "1");

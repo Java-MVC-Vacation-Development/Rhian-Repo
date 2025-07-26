@@ -1,6 +1,7 @@
 package com.CCMS.controller;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,8 @@ public class UserController extends BaseController<User, UserRepository, UserSer
         super(repository, service);
     }
 
+    //Car Session
+
     // POST: http://localhost:8080/users/1/cars
     // Content-Type: application/json
     // Payload: [{ "name": "car" }, { "name": "car2" }]
@@ -47,7 +50,24 @@ public class UserController extends BaseController<User, UserRepository, UserSer
     public ResponseEntity<List<Car>> getUserCars(@PathVariable Long userId) {
 
         List<Car> response = carService.findByUserId(userId);
-        return (response != null) ? ResponseEntity.status(HttpStatus.CREATED).body(response) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return (response != null) ? ResponseEntity.status(HttpStatus.OK).body(response) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+    }
+
+    // GET: http://localhost:8080/users/1/cars/1
+    @GetMapping(path="/{userId}/cars/{carId}")
+    public ResponseEntity<Car> getUserCars(@PathVariable Long userId, @PathVariable Long carId) {
+
+        List<Car> response = carService.findByUserId(userId);
+
+        Car carResponse = null;
+
+        for (Car car : response) {
+            if(Objects.equals(car.getId(), carId))
+                carResponse = car;
+        }
+
+        return (carResponse != null) ? ResponseEntity.status(HttpStatus.OK).body(carResponse) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
     }
 
@@ -58,7 +78,7 @@ public class UserController extends BaseController<User, UserRepository, UserSer
     public ResponseEntity<Car> updateUserCars(@PathVariable Long userId, @PathVariable Long carId, @RequestBody Car car) {
 
         Car response = carService.updateUserCar(car, carId, userId);
-        return (response != null) ? ResponseEntity.status(HttpStatus.CREATED).body(response) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return (response != null) ? ResponseEntity.status(HttpStatus.ACCEPTED).body(response) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
     }
 
@@ -67,7 +87,7 @@ public class UserController extends BaseController<User, UserRepository, UserSer
     public ResponseEntity<Car> deleteUserCar(@PathVariable Long userId, @PathVariable Long carId) {
 
         Car response =  carService.deleteUserCar(carId, userId);
-        return (response != null) ? ResponseEntity.status(HttpStatus.CREATED).body(response) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return (response != null) ? ResponseEntity.status(HttpStatus.ACCEPTED).body(response) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
     }
 
